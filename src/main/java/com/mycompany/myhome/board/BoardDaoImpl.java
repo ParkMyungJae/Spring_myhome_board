@@ -16,4 +16,16 @@ public class BoardDaoImpl implements BoardDao{
 	public List<BoardDto> getList() {
 		return sm.selectList("Board_getList");
 	}
+
+	@Override
+	public void insert(BoardDto dto) {
+		//xml 파일의 id, parameterType에 전달될 객체
+		sm.insert("Board_insert", dto);
+		
+	}
+
+	@Override
+	public BoardDto getView(String id) {
+		return sm.selectOne("Board_view", id);
+	}
 }

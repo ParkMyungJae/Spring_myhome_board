@@ -8,14 +8,25 @@ import org.springframework.stereotype.Service;
 
 @Service("boardService")
 public class BoardServiceImpl implements BoardService {
-	
-	//@Resource 가 BoardDao라는 이름의 객체를 찾아서 연결작업(
-	@Resource(name="BoardDao")
+
+	// @Resource 가 BoardDao라는 이름의 객체를 찾아서 연결작업(
+	@Resource(name = "BoardDao")
 	BoardDao boardDao;
 
 	@Override
 	public List<BoardDto> getList() {
 		return boardDao.getList();
+	}
+
+	@Override
+	public void insert(BoardDto dto) {
+		boardDao.insert(dto);
+
+	}
+
+	@Override
+	public BoardDto getView(String id) {
+		return boardDao.getView(id);
 	}
 
 }

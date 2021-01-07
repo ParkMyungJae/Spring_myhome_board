@@ -76,7 +76,7 @@
 	<c:forEach var="dto"  items="${boardList}">
 		<tr>
 			<td><c:out value="${dto.id}"/></td>
-			<td><c:out value="${dto.title}"/></td>
+			<td><a href='${pageContext.request.contextPath}/board/view?id=${dto.id}'><c:out value="${dto.title}"/></td>
 			<td><c:out value="${dto.writer}"/></td>
 			<td><c:out value="${dto.wdate}"/></td>
 		</tr>		
@@ -122,7 +122,7 @@ function goPage(pg)
 function goWrite()
 {
 	frm = document.form;
-	frm.action="/board/write";
+	frm.action="<%= request.getContextPath() %>/board/write";
 	frm.submit();
 }
 

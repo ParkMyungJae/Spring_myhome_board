@@ -53,7 +53,7 @@
         <td>작성자</td>
         <td>
 			  <div class="input-group mb-3">
-			    <input type="text" class="form-control" placeholder="이름을 입력하세요" name="userid">
+			    <input type="text" class="form-control" placeholder="이름을 입력하세요" name="writer">
 			  </div>
   		</td>
      
@@ -93,7 +93,7 @@
 function goWrite()
 {
 	var frm = document.form;
-	frm.action="/board/save";
+	frm.action="<%=request.getContextPath()%>/board/save";
 	frm.submit();
 }
 

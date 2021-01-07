@@ -5,10 +5,30 @@
  
 <mapper namespace="Board">
 	<select id="Board_getList" resultType="BoardDto">
-		select * from Board
+		SELECT * FROM board
 	</select>
 	
 	<insert id="Board_insert" parameterType="BoardDto">
+		<!--
+			선행쿼리, 이걸 먼저 실행하고 결과를 받아서 다음 쿼리를 실행한다.
+			selectKey 로 시작해서 resultType : 결과 타입
+			keyProperty : 결과받아와서 저장할 변수명,
+			order : BEFORE 먼저 실행해라
+		 -->
+		<selectKey resultType="String" keyProperty="id" order="BEFORE">
+			SELECT NVL(MAX(id), 0) + 1 AS id FROM board
+		</selectKey>
 		
+		insert into board
+		(id, title,	contents, writer, wdate)
+		values
+		(#{id}, #{title}, #{contents}, #{writer}, SYSDATE)
 	</insert>
+	
+	<select id="Board_view" parameterType="String" resultType="BoardDto">
+		select id, title, writer, contents,
+		to_char(wdate, 'yyyy-mm-dd') wdate
+		from board
+		where id = #{id}
+	</select>
 </mapper>
